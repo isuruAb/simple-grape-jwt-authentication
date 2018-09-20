@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180920064338) do
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end
