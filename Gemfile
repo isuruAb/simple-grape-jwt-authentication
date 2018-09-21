@@ -22,6 +22,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'grape'
 gem 'grape-entity'
 gem 'grape_on_rails_routes'
+gem 'jwt'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
