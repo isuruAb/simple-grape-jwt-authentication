@@ -20,9 +20,8 @@ module V1
           if true
 
             payload={"user_id":user_id}
-            hmac_secret = ENV["SECRETKEY"]
 
-            token = JWT.encode payload, hmac_secret, 'HS256'
+            token = JWT.encode payload, ENV["SECRETKEY"], 'HS256'
             
             # eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidGVzdCJ9.pNIWIL34Jo13LViZAJACzK6Yf0qnvT_BuwOxiMCPE-Y
             puts token
@@ -41,9 +40,8 @@ module V1
         end
         get :ping do   
           if "Bearer"==/Bearer/.match(headers['Authorization'])[0]
-            hmac_secret = ENV["SECRETKEY"]
             token=headers['Authorization'].split(" ")[1]
-            decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
+            decoded_token = JWT.decode token, ENV["SECRETKEY"], true, { algorithm: 'HS256' }
             { message: headers['Authorization'].split(" ")[1] }
 
 
