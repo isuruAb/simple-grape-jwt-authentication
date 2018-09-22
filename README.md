@@ -1,1 +1,1 @@
-#Simple Grape JWT Application
+# Simple Grape JWT Application
