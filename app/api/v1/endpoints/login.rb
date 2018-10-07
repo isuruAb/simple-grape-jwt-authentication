@@ -4,6 +4,8 @@ require 'bcrypt'
 module V1
   module ENDPOINTS
     class Login < Grape::API
+      include BCrypt
+
       format :json
       prefix :api
       resource :users do
@@ -13,11 +15,11 @@ module V1
           requires :password, type: String, desc: "Password"
         end
         post :login do
-          user = User.find_by_username(params[:username].downcase)
-          user_id=user.id
-          puts user
-          
-          if user.password==params[:password]
+          @user = User.find_by_username(params[:username].downcase)
+          user_id=@user.id.to_json
+          puts @user
+          #if @user.password == params[:password]
+          if BCrypt::Password.new(@user.password_digest)==params[:password]
             payload={"user_id":"user_id"}
             token = JWT.encode payload, ENV["SECRETKEY"], 'HS256'
             {token: token}
