@@ -15,6 +15,7 @@ module V1
           requires :password, type: String, desc: "Password"
         end
         post :login do
+
           @user = User.find_by_username(params[:username].downcase)
           user_id=@user.id.to_json
           puts @user
